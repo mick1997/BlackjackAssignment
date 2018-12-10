@@ -6,6 +6,8 @@ import blackjack.controller.ICardProvider;
 import blackjack.controller.IGamePolicy;
 import blackjack.controller.IPlayer;
 
+import java.util.Arrays;
+
 class DummyGamePolicy implements IGamePolicy {
 
     @Override
@@ -16,9 +18,28 @@ class DummyGamePolicy implements IGamePolicy {
 
 class DummyCardProvider implements ICardProvider {
 
+    int howManyCreated = 0;
+    Card[] initialCards = createCards(new int[]{10, 8, 5, 3, 4, 6});
+
+    static Card[] createCards(int[] values) {
+        Card[] cards = new Card[values.length];
+        for (int i = 0; i < values.length; i++) {
+            cards[i] = new Card(values[i]);
+        }
+        return cards;
+    }
+
     @Override
     public Card[] getNext(int count) {
-        return new Card[0];
+        if (howManyCreated < 6){
+            Card[] out = new Card[count];
+            for (int i = 0; i < out.length; i++) {
+                out[i] = initialCards[howManyCreated+i];
+            }
+            howManyCreated += count;
+            return out;
+        }
+        return createCards(new int[]{1});
     }
 }
 
@@ -32,7 +53,7 @@ class DummyPlayer implements IPlayer {
 
     @Override
     public void acceptCards(Card[] newCards) {
-
+        System.out.println(String.format("Player %s accept cards: %s", name, Arrays.toString(newCards)));
     }
 
     @Override
@@ -65,6 +86,8 @@ class DummyPlayer implements IPlayer {
         return 0;
     }
 }
+
+
 
 
 public class mainDummy {

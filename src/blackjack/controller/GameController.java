@@ -26,9 +26,11 @@ public class GameController {
         dealInitialHands();
         examineStatus();
 
-        while (!gameOver) {
+        int loop=0;
+        while (!gameOver && loop <= 10) {
             performRound();
             examineStatus();
+            loop += 1;
         }
         allocateCredits();
     }
