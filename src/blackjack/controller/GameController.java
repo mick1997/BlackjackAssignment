@@ -22,12 +22,15 @@ public class GameController {
     private boolean gameOver = false;
 
     public void run() {
-
+        int rounds = 1;
+        System.out.println(String.format("\nRound-%d", rounds));
         dealInitialHands();
         examineStatus();
 
         int loop=0;
         while (!gameOver && loop <= 10) {
+            rounds += 1;
+            System.out.println(String.format("\nRound-%d", rounds));
             performRound();
             examineStatus();
             loop += 1;

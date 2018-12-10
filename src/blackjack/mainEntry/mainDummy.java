@@ -112,7 +112,7 @@ public class mainDummy {
     static void simpleDummyOneGame() {
         IPlayer[] players = new IPlayer[]{new DummyPlayer("#1"), new DummyPlayer("#2")};
         DummyCardProvider cardProvider = new DummyCardProvider(
-                new int[]{10, 9, 5, 3, 4, 6, 100, 50, 300, 200},
+                new int[]{10, 6, 5, 3, 4, 6, 100, 50, 300, 200},
                 2
         );
         GameController controller = new GameController(
