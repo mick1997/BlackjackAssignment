@@ -76,7 +76,7 @@ class DummyPlayer implements IPlayer {
 
     @Override
     public boolean isDone() {
-        return false;
+        return isBlackJack() || isBusted();
     }
 
     @Override
