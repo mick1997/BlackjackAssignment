@@ -13,7 +13,19 @@ class DummyGamePolicy implements IGamePolicy {
 
     @Override
     public boolean isPlayerWin(IPlayer dealer, IPlayer player) {
-        return dealer.getCardSum() < player.getCardSum();
+        if (dealer.isBusted()){
+            if(player.isBusted()){
+                return false;
+            } else {
+                return true;
+            }
+        } else {
+            if(player.isBusted()){
+                return false;
+            } else {
+                return dealer.getCardSum() < player.getCardSum();
+            }
+        }
     }
 }
 
