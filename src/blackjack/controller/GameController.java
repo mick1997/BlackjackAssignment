@@ -2,7 +2,6 @@ package blackjack.controller;
 
 import blackjack.card.Card;
 
-
 public class GameController {
 
     // Dependencies from external world

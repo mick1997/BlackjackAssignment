@@ -7,20 +7,21 @@ import blackjack.controller.IGamePolicy;
 import blackjack.controller.IPlayer;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 class DummyGamePolicy implements IGamePolicy {
 
     @Override
     public boolean isPlayerWin(IPlayer dealer, IPlayer player) {
-        if (dealer.isBusted()){
-            if(player.isBusted()){
+        if (dealer.isBusted()) {
+            if(player.isBusted()) {
                 return false;
-            } else {
+            }
+            else {
                 return true;
             }
-        } else {
-            if(player.isBusted()){
+        }
+        else {
+            if(player.isBusted()) {
                 return false;
             } else {
                 return dealer.getCardSum() < player.getCardSum();
@@ -31,21 +32,22 @@ class DummyGamePolicy implements IGamePolicy {
 
 class DummyCardProvider implements ICardProvider {
 
-    int howManyCreated = 0;
-    int[] deckValues;
-    int defaultCardValue;
+    private int howManyCreated = 0;
+    private int[] deckValues;
+    private int defaultCardValue;
 
     public DummyCardProvider(int[] deckValues, int defaultCardValue){
         this.deckValues = deckValues;
         this.defaultCardValue = defaultCardValue;
     }
 
-    int getNextAvailable(){
+    private int getNextAvailable(){
         if (howManyCreated < deckValues.length){
             int index = howManyCreated;
             howManyCreated += 1;
             return deckValues[index];
-        } else {
+        }
+        else {
             return defaultCardValue;
         }
     }
@@ -116,19 +118,16 @@ class DummyPlayer implements IPlayer {
     }
 }
 
-
-
-
 public class mainDummy {
     public static void main(String[] args) {
         simpleDummyOneGame();
         System.out.println("It works");
     }
 
-    static void simpleDummyOneGame() {
+    private static void simpleDummyOneGame() {
         IPlayer[] players = new IPlayer[]{new DummyPlayer("#1"), new DummyPlayer("#2")};
         DummyCardProvider cardProvider = new DummyCardProvider(
-                new int[]{1, 1, 10, 7, 4, 26},
+                new int[]{},
                 2
         );
         GameController controller = new GameController(
