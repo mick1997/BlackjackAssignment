@@ -81,12 +81,12 @@ class DummyPlayer implements IPlayer {
 
     @Override
     public boolean isBlackJack() {
-        return false;
+        return sum == 21;
     }
 
     @Override
     public boolean isBusted() {
-        return false;
+        return sum > 21;
     }
 
     @Override
@@ -112,7 +112,7 @@ public class mainDummy {
     static void simpleDummyOneGame() {
         IPlayer[] players = new IPlayer[]{new DummyPlayer("#1"), new DummyPlayer("#2")};
         DummyCardProvider cardProvider = new DummyCardProvider(
-                new int[]{10, 8, 5, 3, 4, 6, 100, 50, 300, 200},
+                new int[]{10, 9, 5, 3, 4, 6, 100, 50, 300, 200},
                 2
         );
         GameController controller = new GameController(
