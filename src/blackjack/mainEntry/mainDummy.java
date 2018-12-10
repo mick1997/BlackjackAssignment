@@ -13,7 +13,7 @@ class DummyGamePolicy implements IGamePolicy {
 
     @Override
     public boolean isPlayerWin(IPlayer dealer, IPlayer player) {
-        return false;
+        return dealer.getCardSum() < player.getCardSum();
     }
 }
 
@@ -90,12 +90,17 @@ class DummyPlayer implements IPlayer {
 
     @Override
     public void addCredit(int amount) {
-
+        System.out.println(String.format("Player %s card sum %d accredited %d", name, sum, amount));
     }
 
     @Override
     public int getBet() {
-        return 0;
+        return 42;
+    }
+
+    @Override
+    public int getCardSum() {
+        return sum;
     }
 }
 

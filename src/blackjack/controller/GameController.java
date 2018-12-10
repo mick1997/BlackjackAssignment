@@ -27,7 +27,7 @@ public class GameController {
         dealInitialHands();
         examineStatus();
 
-        int loop=0;
+        int loop = 0;
         while (!gameOver && loop <= 10) {
             rounds += 1;
             System.out.println(String.format("\nRound-%d", rounds));
@@ -35,6 +35,7 @@ public class GameController {
             examineStatus();
             loop += 1;
         }
+        System.out.println("\n");
         allocateCredits();
     }
 
@@ -42,7 +43,7 @@ public class GameController {
 
         dealer.acceptCards(cardProvider.getNext(2));
 
-        for (IPlayer player: players) {
+        for (IPlayer player : players) {
             Card[] twoCards = cardProvider.getNext(2);
             player.acceptCards(twoCards);
         }
@@ -52,14 +53,14 @@ public class GameController {
 
         dealer.think();
 
-        if(!dealer.isDone()) {
+        if (!dealer.isDone()) {
             dealer.acceptCards(cardProvider.getNext(1));
         }
         for (IPlayer player : players) {
-            if(!player.isDone()) {
+            if (!player.isDone()) {
                 player.think();
             }
-            if(!player.isDone()){
+            if (!player.isDone()) {
                 player.acceptCards(cardProvider.getNext(1));
             }
         }
@@ -70,13 +71,13 @@ public class GameController {
         boolean dealerIsDone = dealer.isBlackJack() || dealer.isBusted();
         boolean allPlayersDone = true;
 
-        for (IPlayer player: players) {
-            if(!player.isDone()) {
+        for (IPlayer player : players) {
+            if (!player.isDone()) {
                 allPlayersDone = false;
                 break;
             }
         }
-        if(dealerIsDone || allPlayersDone){
+        if (dealerIsDone || allPlayersDone) {
             gameOver = true;
         }
     }
@@ -86,12 +87,12 @@ public class GameController {
         for (IPlayer player : players) {
             boolean playerWin = gamePolicy.isPlayerWin(dealer, player);
             int amount = player.getBet();
-            if(playerWin) {
-                player.addCredit(amount * 2);
+            if (playerWin) {
+                player.addCredit(amount);
                 dealer.addCredit(-amount);
-            }
-            else{
-               dealer.addCredit(amount);
+            } else {
+                player.addCredit(-amount);
+                dealer.addCredit(amount);
             }
         }
     }

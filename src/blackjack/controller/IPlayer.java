@@ -11,4 +11,6 @@ public interface IPlayer {
     boolean isBusted();
     void addCredit(int amount);
     int getBet();
+
+    int getCardSum();
 }
