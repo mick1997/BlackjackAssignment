@@ -29,4 +29,12 @@ public class Card{
     public String toString() {
         return String.format("Card-%d", value);
     }
+
+    public static Card[] createCards(int[] values) {
+        Card[] cards = new Card[values.length];
+        for (int i = 0; i < values.length; i++) {
+            cards[i] = new Card(values[i]);
+        }
+        return cards;
+    }
 }

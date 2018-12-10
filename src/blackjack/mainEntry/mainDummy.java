@@ -19,27 +19,32 @@ class DummyGamePolicy implements IGamePolicy {
 class DummyCardProvider implements ICardProvider {
 
     int howManyCreated = 0;
-    Card[] initialCards = createCards(new int[]{10, 8, 5, 3, 4, 6});
+    int[] deckValues;
+    int defaultCardValue;
 
-    static Card[] createCards(int[] values) {
-        Card[] cards = new Card[values.length];
-        for (int i = 0; i < values.length; i++) {
-            cards[i] = new Card(values[i]);
+    public DummyCardProvider(int[] deckValues, int defaultCardValue){
+        this.deckValues = deckValues;
+        this.defaultCardValue = defaultCardValue;
+    }
+
+    int getNextAvailable(){
+        if (howManyCreated < deckValues.length){
+            int index = howManyCreated;
+            howManyCreated += 1;
+            return deckValues[index];
+        } else {
+            return defaultCardValue;
         }
-        return cards;
     }
 
     @Override
     public Card[] getNext(int count) {
-        if (howManyCreated < 6){
-            Card[] out = new Card[count];
-            for (int i = 0; i < out.length; i++) {
-                out[i] = initialCards[howManyCreated+i];
-            }
-            howManyCreated += count;
-            return out;
+        Card[] out = new Card[count];
+        for (int i = 0; i < out.length; i++) {
+            out[i] = new Card(getNextAvailable());
         }
-        return createCards(new int[]{1});
+        howManyCreated += count;
+        return out;
     }
 }
 
@@ -98,8 +103,12 @@ public class mainDummy {
 
     static void simpleDummyOneGame() {
         IPlayer[] players = new IPlayer[]{new DummyPlayer("#1"), new DummyPlayer("#2")};
+        DummyCardProvider cardProvider = new DummyCardProvider(
+                new int[]{10, 8, 5, 3, 4, 6, 100, 50, 300, 200},
+                2
+        );
         GameController controller = new GameController(
-                new DummyGamePolicy(), new DummyCardProvider(), new DummyPlayer("Dealer"), players
+                new DummyGamePolicy(), cardProvider, new DummyPlayer("Dealer"), players
         );
         controller.run();
 
