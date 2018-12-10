@@ -6,6 +6,7 @@ import blackjack.controller.ICardProvider;
 import blackjack.controller.IGamePolicy;
 import blackjack.controller.IPlayer;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 class DummyGamePolicy implements IGamePolicy {
@@ -51,6 +52,8 @@ class DummyCardProvider implements ICardProvider {
 class DummyPlayer implements IPlayer {
 
     private String name;
+    private ArrayList<Integer> cards = new ArrayList<>();
+    private int sum=0;
 
     public DummyPlayer(String name){
         this.name = name;
@@ -58,7 +61,12 @@ class DummyPlayer implements IPlayer {
 
     @Override
     public void acceptCards(Card[] newCards) {
-        System.out.println(String.format("Player %s accept cards: %s", name, Arrays.toString(newCards)));
+        for (int i = 0; i < newCards.length; i++) {
+            int cardValue = newCards[i].value;
+            cards.add(cardValue);
+            sum += cardValue;
+        }
+        System.out.println(String.format("Player %s cards: %s. Sum: %d", name, cards, sum));
     }
 
     @Override
