@@ -13,6 +13,6 @@ public class ComputerDealer extends Player {
 
     @Override
     public void think() {
-        System.out.println(String.format("Computer %s thinking...", name));
+        System.out.println(String.format("Computer %s thinking..., and make round more fun", name));
     }
 }

@@ -13,6 +13,6 @@ public class HumanDealer extends Player {
 
     @Override
     public void think() {
-        System.out.println(String.format("Human %s thinking...", name));
+        System.out.println(String.format("Human %s thinking..., and dealer make round", name));
     }
 }

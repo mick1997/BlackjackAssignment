@@ -26,13 +26,12 @@ public class GameController {
         dealInitialHands();
         examineStatus();
 
-        int loop = 0;
-        while (!gameOver && loop <= 10) {
+        //int loop = 0; the loop use for determining to stop gameOver
+        while (!gameOver) {
             rounds += 1;
             System.out.println(String.format("\nRound-%d", rounds));
             performRound();
             examineStatus();
-            loop += 1;
         }
         System.out.println("\n");
         allocateCredits();

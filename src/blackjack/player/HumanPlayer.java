@@ -14,6 +14,10 @@ public class HumanPlayer extends Player {
 
     @Override
     public void think() {
-        System.out.println(String.format("player %s thinking...", name));
+        System.out.println(String.format("player %s thinking..., and Human player thinking", name));
+    }
+
+    public void placeBet(int amount) {
+        System.out.println(String.format("The amount of bet is place %s", amount));
     }
 }
