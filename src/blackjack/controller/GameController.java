@@ -88,7 +88,8 @@ public class GameController {
             if (playerWin) {
                 player.addCredit(amount);
                 dealer.addCredit(-amount);
-            } else {
+            }
+            else {
                 player.addCredit(-amount);
                 dealer.addCredit(amount);
             }

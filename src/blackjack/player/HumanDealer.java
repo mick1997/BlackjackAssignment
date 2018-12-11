@@ -13,6 +13,12 @@ public class HumanDealer extends Player {
 
     @Override
     public void think() {
-        System.out.println(String.format("Human %s thinking..., and dealer make round", name));
+        boolean keepThink = true;
+        System.out.println(String.format("%s thinking...,", name));
+
+        while (keepThink) {
+            System.out.println("Human dealer decide to draw card");
+
+        }
     }
 }

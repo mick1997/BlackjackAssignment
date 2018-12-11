@@ -17,6 +17,11 @@ package blackjack.card;
 //    protected Suit getSuit() {
 //        return suit;
 //    }
+//
+//    @Override
+//    public String toString() {
+//        return String.format("Card=%d ", getFaceValue());
+//    }
 //}
 
 public class Card {

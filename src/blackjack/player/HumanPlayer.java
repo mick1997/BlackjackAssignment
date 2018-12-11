@@ -14,7 +14,15 @@ public class HumanPlayer extends Player {
 
     @Override
     public void think() {
-        System.out.println(String.format("player %s thinking..., and Human player thinking", name));
+
+        boolean keepThink = true;
+        System.out.println(String.format("%s thinking...", name));
+
+        while (keepThink) {
+            System.out.println("The player decide to draw card");
+            keepThink = false;
+        }
+
     }
 
     public void placeBet(int amount) {

@@ -13,6 +13,13 @@ public class ComputerDealer extends Player {
 
     @Override
     public void think() {
-        System.out.println(String.format("Computer %s thinking..., and make round more fun", name));
+
+        boolean keepThink = true;
+        System.out.println(String.format("%s thinking...", name));
+
+        while (keepThink) {
+            System.out.println("The Computer dealer decide to draw card");
+            keepThink = false;
+        }
     }
 }

@@ -1,6 +1,5 @@
 package blackjack.mainEntry;
 
-import blackjack.card.Deck;
 import blackjack.controller.GameController;
 import blackjack.controller.IPlayer;
 import blackjack.player.ComputerDealer;
@@ -15,12 +14,12 @@ public class mainDummy {
     }
 
     private static void simpleDummyOneGame() {
-        IPlayer[] players = new IPlayer[]{new Player("#1"), new Player("#2")};
+        IPlayer[] players = new IPlayer[]{new HumanPlayer("Human player #1"), new HumanPlayer("Human player #2")};
         CardProvider cardProvider = new CardProvider(
-                new int[]{},
+                new int[]{1, 2, 3, 4, 5, 6},
                 2);
         GameController controller = new GameController(
-                new GamePolicy(), cardProvider, new HumanDealer("Dealer"), players);
+                new GamePolicy(), cardProvider, new ComputerDealer("Computer Dealer"), players);
         controller.run();
     }
 
