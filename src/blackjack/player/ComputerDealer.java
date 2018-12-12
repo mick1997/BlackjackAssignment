@@ -11,6 +11,7 @@ public class ComputerDealer extends Player {
         this.name = name;
     }
 
+    // todo: I have implementing think method, somehow it works
     @Override
     public void think() {
 
@@ -18,8 +19,14 @@ public class ComputerDealer extends Player {
         System.out.println(String.format("%s thinking...", name));
 
         while (keepThink) {
-            System.out.println("The Computer dealer decide to draw card");
-            keepThink = false;
+            if (!isBlackJack() || !isBusted()) {
+                System.out.println("The Computer dealer decide to draw card");
+                keepThink = false;
+            }
+            else {
+                System.out.println("The Computer dealer win the game!!!");
+                keepThink = false;
+            }
         }
     }
 }

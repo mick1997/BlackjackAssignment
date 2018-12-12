@@ -18,7 +18,8 @@ public class GamePolicy implements IGamePolicy {
         else {
             if(player.isBusted()) {
                 return false;
-            } else {
+            }
+            else {
                 return dealer.getCardSum() < player.getCardSum();
             }
         }
