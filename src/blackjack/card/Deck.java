@@ -1,74 +1,91 @@
 package blackjack.card;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+import blackjack.controller.ICardProvider;
 
-public class Deck {
+public class Deck implements ICardProvider {
 
-    private static final Random random = new Random();
+    // instance variable: cards, howManyCreated, deckValues
+    private Card[] cards;
+    private int howManyCreated = 0;
+    private int[] deckValues;
 
-    private final List<Card> cards = new ArrayList<>();
-    private int dealIndex = 0;
-
-    // todo: the Deck part is not implementing correctly
-    public Deck() {
-        for (int i = 1; i <= 13; i++) {
-            cards.add(new Card(i));
-        }
-    }
-
-    // the pick number of decks for user
-    public void pickNumOfDeck(int count) {
-        if (count == 1) {
+    /**
+     * @param: numberOfDeck
+     * user pick the number of deck to use
+     * */
+    public Deck(int numberOfDeck) {
+        if (numberOfDeck == 1) {
+            cards = new Card[52];
+            int numberOfCard = 0;
             for (int i = 1; i <= 13; i++) {
-                cards.add(new Card(i));
+                cards[numberOfCard] = new Card(i);
             }
         }
         else {
-            for (int j = 1; j <= count; j++) {
-                for (int i = 1; i <= 13; i++) {
-                    cards.add(new Card(i));
-                }
+            cards = new Card[104];
+            int numberOfCard = 0;
+            for (int i = 1; i <= 13; i++) {
+                cards[numberOfCard] = new Card(i);
             }
         }
     }
 
+    /**
+     * @param: None
+     * @return: None
+     * shuffle the card
+     * */
     public void shuffle() {
-        for (int i = 0; i < cards.size() - 1; i++) {
-            int j = random.nextInt(cards.size() - i) + i;
-            Card card1 = cards.get(i);
-            Card card2 = cards.get(j);
-            cards.set(i, card2);
-            cards.set(j, card1);
+        int temp = 0;
+        for (int i = 0; i < cards.length; i++) {
+            int random = (int)(Math.random() * ((cards.length - i) + 1));
+            cards[temp] = getCardAt(i);
+            cards[i] = cards[random];
+            cards[random] = cards[temp];
         }
     }
 
-    private int remainingCards() {
-        return cards.size() - dealIndex;
-    }
-
-    protected Card[] dealHand(int number) {
-        if (remainingCards() < number) {
-            return null;
-        }
-
-        Card[] cards = new Card[number];
-
-        for (int i = 0; i < number; i++) {
-            cards[i] = dealCard();
-        }
-        return cards;
-    }
-
-    private Card dealCard() {
-
-        if (remainingCards() == 0) {
-            return null;
+    /**
+     * @param: position: int
+     * @return: Card
+     * get the position of card to do shuffle
+     * */
+    private Card getCardAt(int position) {
+        if (position >= cards.length) {
+            throw new IndexOutOfBoundsException("Values are out of bounds");
         }
         else {
-            return cards.get(dealIndex++);
+            return cards[position];
         }
     }
 
+    /**
+     * @param: None
+     * @return: int
+     * get one more card if card is less than deckValues; else, return 0 card
+     * */
+    private int getNextAvailable() {
+        if (howManyCreated < deckValues.length) {
+            int index = howManyCreated;
+            howManyCreated += 1;
+            return deckValues[index];
+        }
+        else {
+            return 0;
+        }
+    }
+
+    /**
+     * @param: count: int
+     * @return: Card[]
+     * get card every time, player or dealer wants
+     * */
+    @Override
+    public Card[] getNext(int count) {
+        Card[] out = new Card[count];
+        for (int i = 0; i < out.length; i++) {
+            out[i] = new Card(getNextAvailable());
+        }
+        return out;
+    }
 }

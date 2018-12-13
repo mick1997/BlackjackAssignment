@@ -1,47 +1,33 @@
 package blackjack.card;
 
-//class RealCard {
-//
-//    private int faceValue; // 1 for A, 11 for J, 12 for Q, 13 for K
-//    private Suit suit;
-//
-//    public RealCard(int faceValue, Suit suit) {
-//        this.faceValue = faceValue;
-//        this.suit = suit;
-//    }
-//
-//    public int getFaceValue() {
-//        return faceValue;
-//    }
-//
-//    protected Suit getSuit() {
-//        return suit;
-//    }
-//
-//    @Override
-//    public String toString() {
-//        return String.format("Card=%d ", getFaceValue());
-//    }
-//}
-
 public class Card {
 
-    public int value;
+    // instance variable: faceValue
+    private int faceValue; // 1 for A, 11 for J, 12 for Q, 13 for K
 
-    public Card(int value) {
-        this.value = value;
+    /**
+     * @param: faceValue
+     * */
+    public Card(int faceValue) {
+        this.faceValue = faceValue;
     }
 
+    /**
+     * @param: None
+     * @return: int
+     * get the faceValue card
+     * */
+    public int getFaceValue() {
+        return faceValue;
+    }
+
+    /**
+     * @param: None
+     * @return: String
+     * print card value
+     * */
     @Override
     public String toString() {
-        return String.format("Card-%d", value);
+        return String.format("Card=%d ", getFaceValue());
     }
-
-//    public static Card[] createCards(int[] values) {
-//        Card[] cards = new Card[values.length];
-//        for (int i = 0; i < values.length; i++) {
-//            cards[i] = new Card(values[i]);
-//        }
-//        return cards;
-//    }
 }

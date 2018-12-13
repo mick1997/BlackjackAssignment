@@ -4,19 +4,27 @@ import blackjack.mainEntry.Player;
 
 public class ComputerDealer extends Player {
 
+    // instance variable: name
     private String name;
 
+    /**
+     * @param; name: String
+     * */
     public ComputerDealer(String name) {
         super(name);
         this.name = name;
     }
 
-    // todo: I have implementing think method, somehow it works
+    /**
+     * @param: None
+     * @return: None
+     * think method that override from Player class for implementing more logic thinking
+     * */
     @Override
     public void think() {
 
         boolean keepThink = true;
-        System.out.println(String.format("%s thinking...", name));
+        System.out.println(String.format("%s is thinking...", name));
 
         while (keepThink) {
             if (!isBlackJack() || !isBusted()) {

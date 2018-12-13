@@ -4,23 +4,24 @@ import blackjack.mainEntry.Player;
 
 public class HumanDealer extends Player {
 
+    // instance variable: name
     private String name;
 
+    /**
+     * @param; name: String
+     * */
     public HumanDealer(String name) {
         super(name);
         this.name = name;
     }
 
-    // todo: I have implementing think method, for human dealer,
+    /**
+     * @param: None
+     * @return: None
+     * think method that override from Player class for implementing more logic thinking
+     * */
     @Override
     public void think() {
-        boolean keepThink = true;
-        System.out.println(String.format("%s thinking...,", name));
-
-        while (keepThink) {
-
-            System.out.println("Human dealer decide to draw card");
-            keepThink = false;
-        }
+        System.out.println(String.format("%s is thinking...,", name));
     }
 }
