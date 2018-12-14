@@ -2,7 +2,7 @@ package blackjack.player;
 
 import blackjack.mainEntry.Player;
 
-public class ComputerDealer extends Player {
+public class Dealer extends Player {
 
     // instance variable: name
     private String name;
@@ -10,7 +10,7 @@ public class ComputerDealer extends Player {
     /**
      * @param; name: String
      * */
-    public ComputerDealer(String name) {
+    public Dealer(String name) {
         super(name);
         this.name = name;
     }
@@ -18,7 +18,7 @@ public class ComputerDealer extends Player {
     /**
      * @param: None
      * @return: None
-     * think method that override from Player class for implementing more logic thinking
+     * think method that override from realPlayer class for implementing more logic thinking
      * */
     @Override
     public void think() {

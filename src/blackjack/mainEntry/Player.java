@@ -37,7 +37,7 @@ public class Player implements IPlayer {
     /**
      * @param: None
      * @return: None
-     * think method that Override in HumanPlayer, HumanDealer or ComputerDealer class
+     * think method that Override in realPlayer, HumanDealer or Dealer class
      * */
     @Override
     public void think() {}
