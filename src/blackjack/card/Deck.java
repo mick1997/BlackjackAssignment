@@ -2,77 +2,65 @@ package blackjack.card;
 
 import blackjack.controller.ICardProvider;
 
+import java.util.Random;
+
+/**
+ * A collection of N card sets, each consist of a standard 52 cards. N≥1.
+ * Input: Ns standard 52-card sets
+ * Constraints (behavior):
+     * Random shuffling: what; when; when not; how;
+     * Infinite recycling: how; when; what;
+     * Provide count cards: .....
+ *
+ * First consider the constraints because input serves the constraints and input only matters to its creator.
+ *
+ */
 public class Deck implements ICardProvider {
 
-    // instance variable: cards, howManyCreated, deckValues
-    private Card[] cards;
-    private int howManyCreated = 0;
-    private int[] deckValues;
 
-    /**
-     * @param: numberOfDeck
-     * user pick the number of deck to use
-     * */
-    public Deck(int numberOfDeck) {
-        if (numberOfDeck == 1) {
-            cards = new Card[52];
-            int numberOfCard = 0;
-            for (int i = 1; i <= 13; i++) {
-                cards[numberOfCard] = new Card(i);
+    private Card[] allCards;
+    private Random random = new Random();
+    private int nextAvailableCardIndex = 0;
+
+    private final static int STANDARD_CARD_SET_COUNT = 52;
+    private final static String[] SUITS = {"club", "heart", "diamond", "spade"};
+
+    public Deck(int nSets) {
+        // Create N-52-card sets and assign it to this.allCards
+        Card[] nSetCards = new Card[nSets * STANDARD_CARD_SET_COUNT];
+        int indexInAllCards = 0;
+        for (int setIndex = 0; setIndex < nSets; setIndex++) {
+            for (int value = 1; value <= 13; value++) {
+                for (int suitIndex = 0; suitIndex < SUITS.length; suitIndex++) {
+                    String suit = SUITS[suitIndex];
+                    int faceValue = value;
+                    Card card = new Card(faceValue);
+//                    Card card = new Card(faceValue, suit);
+                    nSetCards[indexInAllCards++] = card;
+                }
             }
         }
-        else {
-            cards = new Card[104];
-            int numberOfCard = 0;
-            for (int i = 1; i <= 13; i++) {
-                cards[numberOfCard] = new Card(i);
-            }
+        this.allCards = nSetCards;
+    }
+
+//    public Deck(Card[] allCards) {
+//        // Suppose all the cards are already there.
+//        this.allCards = allCards.clone();
+//    }
+
+    private void shuffle() {
+        for (int i = 0; i < allCards.length; i++) {
+            int index1 = random.nextInt(allCards.length);
+            int index2 = random.nextInt(allCards.length);
+            Card temp = allCards[index1];
+            allCards[index1] = allCards[index2];
+            allCards[index2] = temp;
         }
     }
 
-    /**
-     * @param: None
-     * @return: None
-     * shuffle the card
-     * */
-    public void shuffle() {
-        int temp = 0;
-        for (int i = 0; i < cards.length; i++) {
-            int random = (int)(Math.random() * ((cards.length - i) + 1));
-            cards[temp] = getCardAt(i);
-            cards[i] = cards[random];
-            cards[random] = cards[temp];
-        }
-    }
-
-    /**
-     * @param: position: int
-     * @return: Card
-     * get the position of card to do shuffle
-     * */
-    private Card getCardAt(int position) {
-        if (position >= cards.length) {
-            throw new IndexOutOfBoundsException("Values are out of bounds");
-        }
-        else {
-            return cards[position];
-        }
-    }
-
-    /**
-     * @param: None
-     * @return: int
-     * get one more card if card is less than deckValues; else, return 0 card
-     * */
-    private int getNextAvailable() {
-        if (howManyCreated < deckValues.length) {
-            int index = howManyCreated;
-            howManyCreated += 1;
-            return deckValues[index];
-        }
-        else {
-            return 0;
-        }
+    private void reset(){
+        shuffle();
+        nextAvailableCardIndex = 0;
     }
 
     /**
@@ -82,10 +70,14 @@ public class Deck implements ICardProvider {
      * */
     @Override
     public Card[] getNext(int count) {
-        Card[] out = new Card[count];
-        for (int i = 0; i < out.length; i++) {
-            out[i] = new Card(getNextAvailable());
+        Card[] nextCards = new Card[count];
+        for (int i = 0; i < count; i++) {
+            nextCards[i] = allCards[nextAvailableCardIndex];
+            nextAvailableCardIndex += 1;
+            if(nextAvailableCardIndex >= allCards.length){
+                reset();
+            }
         }
-        return out;
+        return nextCards;
     }
 }

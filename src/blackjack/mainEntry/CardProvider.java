@@ -3,6 +3,12 @@ package blackjack.mainEntry;
 import blackjack.card.Card;
 import blackjack.controller.ICardProvider;
 
+/**
+ * This class takes in a fixed group of cards and one default card.
+ * It provides the next count cards from the fixed group (in the same order) until the group is exhausted
+ * and then always provides the same default card.
+ */
+
 public class CardProvider implements ICardProvider {
 
     // instance variable: howManyCreated, deckValues, defaultCardValue
