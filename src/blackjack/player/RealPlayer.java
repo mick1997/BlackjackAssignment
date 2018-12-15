@@ -3,7 +3,7 @@ package blackjack.player;
 
 import blackjack.mainEntry.Player;
 
-public class realPlayer extends Player {
+public class RealPlayer extends Player {
 
     // instance variable: name, amountBet
     private String name;
@@ -12,7 +12,7 @@ public class realPlayer extends Player {
     /**
      * @param; name: String, amountBet: int
      * */
-    public realPlayer(String name, int amountBet) {
+    public RealPlayer(String name, int amountBet) {
         super(name);
         this.name = name;
         this.amountBet = amountBet;
@@ -21,7 +21,7 @@ public class realPlayer extends Player {
     /**
      * @param: None
      * @return: None
-     * think method that override from realPlayer class for implementing more logic thinking
+     * think method that override from RealPlayer class for implementing more logic thinking
      * */
     @Override
     public void think() {
@@ -32,12 +32,12 @@ public class realPlayer extends Player {
 
         while (keepThink) {
             if (drawCard) {
-                System.out.println("realPlayer decide to draw card!");
+                System.out.println("RealPlayer decide to draw card!");
                 drawCard = true;
                 keepThink = false;
             }
             else {
-                System.out.println("realPlayer decide not to draw card!");
+                System.out.println("RealPlayer decide not to draw card!");
                 drawCard = false;
                 keepThink = false;
             }

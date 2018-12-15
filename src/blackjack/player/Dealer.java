@@ -18,7 +18,7 @@ public class Dealer extends Player {
     /**
      * @param: None
      * @return: None
-     * think method that override from realPlayer class for implementing more logic thinking
+     * think method that override from RealPlayer class for implementing more logic thinking
      * */
     @Override
     public void think() {

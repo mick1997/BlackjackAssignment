@@ -21,7 +21,6 @@ public class Deck implements ICardProvider {
     private Card[] allCards;
     private Random random = new Random();
     private int nextAvailableCardIndex = 0;
-
     private final static int STANDARD_CARD_SET_COUNT = 52;
     private final static String[] SUITS = {"club", "heart", "diamond", "spade"};
 
@@ -35,7 +34,6 @@ public class Deck implements ICardProvider {
                     String suit = SUITS[suitIndex];
                     int faceValue = value;
                     Card card = new Card(faceValue);
-//                    Card card = new Card(faceValue, suit);
                     nSetCards[indexInAllCards++] = card;
                 }
             }
